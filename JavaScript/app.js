@@ -132,20 +132,20 @@ async function setImportantInfo() {
         {
             date: weatherInfo.forecast.forecastday[0].date,
             weather: weatherInfo.forecast.forecastday[0].day.condition.text,
-            maxTemp: weatherInfo.forecast.forecastday[0].day.maxtemp_c,
-            minTemp: weatherInfo.forecast.forecastday[0].day.mintemp_c,
+            maxTemp: weatherInfo.forecast.forecastday[0].day.maxtemp_c + ' °',
+            minTemp: weatherInfo.forecast.forecastday[0].day.mintemp_c + ' °',
         },
         {
             date: weatherInfo.forecast.forecastday[1].date,
             weather: weatherInfo.forecast.forecastday[1].day.condition.text,
-            maxTemp: weatherInfo.forecast.forecastday[1].day.maxtemp_c,
-            minTemp: weatherInfo.forecast.forecastday[1].day.mintemp_c,
+            maxTemp: weatherInfo.forecast.forecastday[1].day.maxtemp_c  + ' °',
+            minTemp: weatherInfo.forecast.forecastday[1].day.mintemp_c  + ' °',
         },
         {
             date: weatherInfo.forecast.forecastday[2].date,
             weather: weatherInfo.forecast.forecastday[2].day.condition.text,
-            maxTemp: weatherInfo.forecast.forecastday[2].day.maxtemp_c,
-            minTemp: weatherInfo.forecast.forecastday[2].day.mintemp_c,
+            maxTemp: weatherInfo.forecast.forecastday[2].day.maxtemp_c + ' °',
+            minTemp: weatherInfo.forecast.forecastday[2].day.mintemp_c + ' °',
         },
     ];
 
@@ -185,9 +185,6 @@ async function addIconsDescription() {
 
 // Funcion para añadir los datos al DOM
 async function addDataDOM() {
-    await setImportantInfo();
-    await addIconsDescription();
-
     // Añadimos ubicacion, fecha y hora actual
     h1.textContent = weatherCurrentDay.city;
     h2.textContent = weatherCurrentDay.localtime;
@@ -230,4 +227,11 @@ async function addDataDOM() {
     ulDays.append(nextDaysFrag);   
 }
 
-addDataDOM();
+// Funcion principal, llama al resto de funciones y hace que funcione la APP
+async function weatherApp() {
+    await setImportantInfo();
+    await addIconsDescription();
+    await addDataDOM();
+}
+
+weatherApp();
