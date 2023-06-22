@@ -103,6 +103,7 @@ async function getWeatherData() {
     await getUserLocation();
     const response = await fetch(urlApi + apiKey + locationUser + params);
     const weatherData = await response.json();
+    console.log(weatherData);
 
     return weatherData;
 }
@@ -132,20 +133,20 @@ async function setImportantInfo() {
         {
             date: weatherInfo.forecast.forecastday[0].date,
             weather: weatherInfo.forecast.forecastday[0].day.condition.text,
-            maxTemp: weatherInfo.forecast.forecastday[0].day.maxtemp_c + ' °',
-            minTemp: weatherInfo.forecast.forecastday[0].day.mintemp_c + ' °',
+            maxTemp: Math.round(weatherInfo.forecast.forecastday[0].day.maxtemp_c) + ' °',
+            minTemp: Math.round(weatherInfo.forecast.forecastday[0].day.mintemp_c) + ' °',
         },
         {
             date: weatherInfo.forecast.forecastday[1].date,
             weather: weatherInfo.forecast.forecastday[1].day.condition.text,
-            maxTemp: weatherInfo.forecast.forecastday[1].day.maxtemp_c  + ' °',
-            minTemp: weatherInfo.forecast.forecastday[1].day.mintemp_c  + ' °',
+            maxTemp: Math.round(weatherInfo.forecast.forecastday[1].day.maxtemp_c)  + ' °',
+            minTemp: Math.round(weatherInfo.forecast.forecastday[1].day.mintemp_c)  + ' °',
         },
         {
             date: weatherInfo.forecast.forecastday[2].date,
             weather: weatherInfo.forecast.forecastday[2].day.condition.text,
-            maxTemp: weatherInfo.forecast.forecastday[2].day.maxtemp_c + ' °',
-            minTemp: weatherInfo.forecast.forecastday[2].day.mintemp_c + ' °',
+            maxTemp: Math.round(weatherInfo.forecast.forecastday[2].day.maxtemp_c) + ' °',
+            minTemp: Math.round(weatherInfo.forecast.forecastday[2].day.mintemp_c) + ' °',
         },
     ];
 
