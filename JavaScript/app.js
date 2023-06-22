@@ -19,6 +19,7 @@ let weatherCurrentDay = {};
 let nextDays = [];
 let weatherPerHours;
 let nextHours = [];
+let iconWeather = '';
 
 // Creamos un array para poder determinar segun el tiempo que haga el icono que le corresponde
 const forecastIcons = [
@@ -126,7 +127,7 @@ async function setImportantInfo() {
         minTemp: weatherInfo.forecast.forecastday[0].day.mintemp_c,       
     };
 
-    // Datos de los proximos dos dias
+    // Datos de los proximos tres dias
     nextDays = [
         {
             date: weatherInfo.forecast.forecastday[0].date,
@@ -148,7 +149,7 @@ async function setImportantInfo() {
         },
     ];
 
-    // Datos de las proximas 5 horas
+    // Datos de las proximas cinco horas
     weatherPerHours = weatherInfo.forecast.forecastday[0].hour;
     let counter = 0;
     for(const hour of weatherPerHours) {
@@ -169,9 +170,23 @@ function changeDateFormat(date) {
     return `${newDate[2]}-${newDate[1]}-${newDate[0]}`;
 }
 
+// Funcion para añadir los iconos del tiempo a la descripcion del mismo
+async function addIconsDescription() {
+    forecastIcons.map((icon) => {
+        icon.name.map((description) => {
+            nextDays.map((nextDay) => {
+                if(description === nextDay.weather) {
+                    iconWeather = icon.img;
+                }
+            })
+        })
+    })
+};
+
 // Funcion para añadir los datos al DOM
 async function addDataDOM() {
     await setImportantInfo();
+    await addIconsDescription();
 
     // Añadimos ubicacion, fecha y hora actual
     h1.textContent = weatherCurrentDay.city;
@@ -190,7 +205,7 @@ async function addDataDOM() {
 
         liNextHours.innerHTML = `
             <p>${nextHour.hour.split(' ')[1]}</p>
-            <img/>
+            <img src="${iconWeather}"/>
         `;
         hourFrag.append(liNextHours);
     });
@@ -205,7 +220,7 @@ async function addDataDOM() {
 
     liNextDays.innerHTML = `
         <p>${changeDateFormat(nextDay.date).replace('-', '/').split('-')[0]}</p>
-        <img/>
+        <img src="${iconWeather}"/>
         <p>${nextDay.maxTemp}</p>
         <p>${nextDay.minTemp}</p>
     `;
