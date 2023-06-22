@@ -19,7 +19,6 @@ let weatherCurrentDay = {};
 let nextDays = [];
 let weatherPerHours;
 let nextHours = [];
-let iconWeather = '';
 
 // Creamos un array para poder determinar segun el tiempo que haga el icono que le corresponde
 const forecastIcons = [
@@ -44,7 +43,7 @@ const forecastIcons = [
         img: '../assets/fog.svg'
     },
     {
-        name: ['Lluvia moderada a intervalos', 'Llovizna a intervalos', 'Lluvias ligeras a intervalos', 'Periodos de lluvia moderada',
+        name: ['Lluvia  moderada a intervalos', 'Llovizna a intervalos', 'Lluvias ligeras a intervalos', 'Periodos de lluvia moderada',
                 'Periodos de fuertes lluvias', 'Ligeras precipitaciones', 'Lluvias fuertes o moderadas', 'Lluvias torrenciales',
                 'Ligeros chubascos de aguanieve', 'Chubascos de aguanieve fuertes o moderados'],
         img: '../assets/interval-rain.svg'
@@ -63,12 +62,12 @@ const forecastIcons = [
         img: '../assets/wind.svg'
     },
     {
-        name: ['Llovizna', 'Llovizna helada', 'Fuerte llovizna helada', 'Ligeras lluvias', 'Lluvia moderada', 'Fuertes lluvias', 'Ligeras lluvias heladas', 'Lluvias heladas fuertes o moderadas', 
+        name: ['Llovizna', 'Llovizna helada', 'Fuerte llovizna helada', 'Ligeras  lluvias', 'Lluvia moderada', 'Fuertes lluvias', 'Ligeras lluvias heladas', 'Lluvias heladas fuertes o moderadas', 
                 'Ligeras precipitaciones de aguanieve', 'Aguanieve fuerte o moderada'],
         img: '../assets/rain.svg'
     },
     {
-        name: ['Nevadas ligeras', 'Nieve moderada', 'Nevadas intensas', 'Fuertes nevadas', 'Ligeras precipitaciones de nieve', 'Chubascos de nieve fuertes o moderados'],
+        name: ['Nevadas  ligeras', 'Nieve moderada', 'Nevadas intensas', 'Fuertes nevadas', 'Ligeras precipitaciones de nieve', 'Chubascos de nieve fuertes o moderados'],
         img: '../assets/snow.svg'
     },
     {
@@ -103,7 +102,6 @@ async function getWeatherData() {
     await getUserLocation();
     const response = await fetch(urlApi + apiKey + locationUser + params);
     const weatherData = await response.json();
-    console.log(weatherData);
 
     return weatherData;
 }
@@ -171,17 +169,17 @@ function changeDateFormat(date) {
     return `${newDate[2]}-${newDate[1]}-${newDate[0]}`;
 }
 
-// Funcion para añadir los iconos del tiempo a la descripcion del mismo
-async function addIconsDescription() {
+// Funcion para añadir los iconos del tiempo a los proximos 3 dias
+function addIconsDescription(weather) {
+    let matchIcons = [];
     forecastIcons.map((icon) => {
         icon.name.map((description) => {
-            nextDays.map((nextDay) => {
-                if(description === nextDay.weather) {
-                    iconWeather = icon.img;
-                }
-            })
+            if(description === weather) {
+                matchIcons.push(icon.img);
+            }
         })
     })
+    return matchIcons;
 };
 
 // Funcion para añadir los datos al DOM
@@ -203,7 +201,7 @@ async function addDataDOM() {
 
         liNextHours.innerHTML = `
             <p>${nextHour.hour.split(' ')[1]}</p>
-            <img src="${iconWeather}"/>
+            <img src="${addIconsDescription(nextHour.weather)}"/>
         `;
         hourFrag.append(liNextHours);
     });
@@ -218,7 +216,7 @@ async function addDataDOM() {
 
     liNextDays.innerHTML = `
         <p>${changeDateFormat(nextDay.date).replace('-', '/').split('-')[0]}</p>
-        <img src="${iconWeather}"/>
+        <img src="${addIconsDescription(nextDay.weather)}"/>
         <p>${nextDay.maxTemp}</p>
         <p>${nextDay.minTemp}</p>
     `;
@@ -231,7 +229,8 @@ async function addDataDOM() {
 // Funcion principal, llama al resto de funciones y hace que funcione la APP
 async function weatherApp() {
     await setImportantInfo();
-    await addIconsDescription();
+    //await addIconsDescription(nextHours);
+    //await addIconsDescription(nextDays);
     await addDataDOM();
 }
 
