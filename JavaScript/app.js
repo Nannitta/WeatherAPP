@@ -24,7 +24,8 @@ let nextHours = [];
 const forecastIcons = [
     {
         name: ['Soleado'],
-        img: '../assets/sunny.svg'
+        img: '../assets/sunny.svg',
+        imgBack: '../assets/sun.png'
     },
     {
         name: ['Despejado'],
