@@ -233,8 +233,6 @@ async function addDataDOM() {
 // Funcion principal, llama al resto de funciones y hace que funcione la APP
 async function weatherApp() {
     await setImportantInfo();
-    //await addIconsDescription(nextHours);
-    //await addIconsDescription(nextDays);
     await addDataDOM();
 }
 
