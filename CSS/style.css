@@ -22,15 +22,17 @@ main {
     width: 100vw;
 }
 
+/* CURRENT WEATHER */
 #index {
     display: flex;
     flex-direction: column;
     font-family: 'Lato', sans-serif;
     color: var(--mainColor);
+    height: 100vh;
 }
 
 .currentWeather {
-    padding: 2rem 3rem 0 3rem;
+    padding: 1rem 3rem 0 3rem;
     width: 100%;
     height: 16rem;
     margin-bottom: 1rem;
@@ -77,7 +79,7 @@ h3 {
 .description {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
 }
 
 #temp {
@@ -90,9 +92,10 @@ h3 {
 }
 
 .hourParagraph {
-    justify-content: right;
+    justify-self: right;
 }
 
+/* SECTION NEXT HOURS */
 .container-next-hours {
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.466);
@@ -121,6 +124,7 @@ h3 {
     box-shadow: 2px 0 4px -4px var(--mainColor), -2px 0 4px -4px var(--mainColor);
 }
 
+/* SECTION NEXT DAYS */
 .last-section {
     border-radius: 30px 30px 0 0;
     background-color: rgba(255, 255, 255, 0.644);
@@ -169,6 +173,8 @@ h4 {
     justify-self: right;
 }
 
+
+/* BUTTON */
 img {
     width: 40px;
     height: 40px;
@@ -198,4 +204,34 @@ button {
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+/* MORE INFO */
+div.moreInfo {
+    height: 50vh;
+    background-color: var(--mainColor);
+    border: 1px solid var(--mainColor);
+    opacity: 0.8;
+    color: #dfdce7;
+    gap: 1rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.moreInfo article {
+    width: 100%;
+    display: flex;
+}
+
+.sunset-sunrise {
+    display: flex;
+    flex-direction: column;
+}
+
+.sunset-sunrise div {
+    display: flex;
+}
+
+.moreInfo article h2 {
+    font-size: 1.2rem;
+    justify-content: left;
 }

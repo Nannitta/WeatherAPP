@@ -8,40 +8,88 @@
     </head>
     <body>
         <div class="geolocation">
-        <main>
-            <div class="background"></div>
-            <div id="index">
-                <section class="currentWeather">
-                    <div class="date">
-                        <h1></h1>
-                        <div class="date-container">
-                            <h2></h2>
-                            <h3></h3>
+            <main>
+                <div class="background"></div>
+                    <div id="index">
+                        <section class="currentWeather">
+                            <div class="date">
+                                <h1></h1>
+                                <div class="date-container">
+                                    <h2></h2>
+                                    <h3></h3>
+                                </div>
+                            </div>                    
+                            <div class="description">
+                                <div id="temp"></div>
+                                <p class="hourParagraph"></p>
+                            </div>
+                        </section>
+
+                        <section>
+                            <ul class="nextHours"></ul>
+                        </section>
+
+                        <section class="last-section">
+                            <h4>Próximos 3 días</h4>
+                            <ul class="nextDays"></ul>
+                        </section>
+                        <div class="hidden-button">
+                            <div class="container-button">
+                                <button>
+                                    <img src="../assets/expand-more.svg" alt="More Info">
+                                </button>
+                            </div>
                         </div>
-                    </div>                    
-                    <div class="description">
-                        <div id="temp"></div>
-                        <p class="hourParagraph"></p>
                     </div>
-                </section>
 
-                <section>
-                    <ul class="nextHours"></ul>
-                </section>
+                    <div class="moreInfo">
+                        <article>
+                                <img src="../assets/temperature.svg" alt="Temp">
+                                <div class="dayTemperatures">
+                                    <h2>Max</h2>
+                                    <h2>Min</h2>
+                                </div>
+                            <div class="dayTemperatures">
+                                <p></p>
+                                <p></p>
+                            </div>
+                        </article>
 
-                <section class="last-section">
-                    <h4>Próximos 3 días</h4>
-                    <ul class="nextDays"></ul>
-                </section>
-                <div class="hidden-button">
-                    <div class="container-button">
-                        <button>
-                            <img src="../assets/expand-more.svg" alt="More Info">
-                        </button>
+                        <article class="uv">
+                            <img src="../assets/uv.svg" alt="UV">
+                            <p></p>
+                            <h2>UV</h2>
+                        </article>
+
+                        <article class="humidity">
+                            <img src="../assets/humidity.svg" alt="Humidity Icon">
+                            <h2>Humidity</h2>
+                            <p></p>
+                        </article>
+                        <article class="wind">
+                            <img src="../assets/wind2.svg" alt="Wind Icon">
+                            <div>
+                                <h2>Wind</h2>
+                                <p></p>                                                       
+                                <h5>Dir.</h5>
+                                <p></p>
+                            </div>
+                        </article>
+
+                        <article class="sunset-sunrise">
+                            <div>
+                                <h2>Amanecer</h2>
+                                <img src="../assets/sunrise.svg" alt="Sunrise">
+                                <p></p>
+                            </div>
+                            <div>
+                                <h2>Anochecer</h2>
+                                <img src="../assets/sunset.svg" alt="Sunset">
+                                <p></p>
+                            </div>
+                        </article>                        
                     </div>
-                </div>
-            </div>
-        </main>
+            </main>
         </div>  
 
         <script src="../JavaScript/app.js"></script>

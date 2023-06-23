@@ -7,6 +7,11 @@ const temp = document.querySelector('#temp');
 const hourParagraph = document.querySelector('.hourParagraph');
 const ulHours = document.querySelector('.nextHours');
 const ulDays = document.querySelector('.nextDays')
+const temperatures = document.querySelectorAll('.dayTemperatures p');
+const humidity = document.querySelector('.humidity p');
+const wind = document.querySelectorAll('.wind p');
+const sunsetSunrise = document.querySelectorAll('.sunset-sunrise p');
+const uv = document.querySelector('.uv p');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -81,8 +86,7 @@ const forecastIcons = [
     },
     {
         name: ['Nieve moderada con tormenta en la región', 'Nieve moderada o fuertes nevadas con tormenta en la región'],
-        imgDay: '../assets/day-storm-snow.svg',
-        imgNight: '../assets/night-storm-snow.svg'
+        img: '../assets/day-storm-snow.svg',
     }
 ]
 
@@ -124,7 +128,8 @@ async function setImportantInfo() {
         sunrise: weatherInfo.forecast.forecastday[0].astro.sunrise,
         sunset: weatherInfo.forecast.forecastday[0].astro.sunset,
         maxTemp: weatherInfo.forecast.forecastday[0].day.maxtemp_c,
-        minTemp: weatherInfo.forecast.forecastday[0].day.mintemp_c,       
+        minTemp: weatherInfo.forecast.forecastday[0].day.mintemp_c,
+        uv: weatherInfo.current.uv,       
     };
 
     // Datos de los proximos tres dias
@@ -204,7 +209,7 @@ async function addDataDOM() {
         
         liNextHours.innerHTML = `
             <p>${nextHour.hour.split(' ')[1]}</p>
-            <img src="${addIconsDescription(nextHour.weather)}"/>
+            <img src="${addIconsDescription(nextHour.weather)}" alt="Weather Icon"/>
         `;
         divContainerNextHours.append(liNextHours);
         hourFrag.append(divContainerNextHours);
@@ -220,14 +225,32 @@ async function addDataDOM() {
 
     liNextDays.innerHTML = `
         <p>${changeDateFormat(nextDay.date).replace('-', '/').split('-')[0]}</p>
-        <img src="${addIconsDescription(nextDay.weather)}"/>
+        <img src="${addIconsDescription(nextDay.weather)}" alt="Weather Icon"/>
         <p>${nextDay.maxTemp}</p>
         <p>${nextDay.minTemp}</p>
     `;
     nextDaysFrag.append(liNextDays);
    });
 
-    ulDays.append(nextDaysFrag);   
+    ulDays.append(nextDaysFrag);
+    
+    // Añadimos la informacion del article de temperaturas
+   temperatures[0].textContent = `${Math.round(weatherCurrentDay.maxTemp)} °C`;
+   temperatures[1].textContent = `${Math.round(weatherCurrentDay.minTemp)} °C`;
+
+   // Añadimos la informacion relativa a UV
+   uv.textContent = `${weatherCurrentDay.uv}`;
+
+   // Añadimos la informacion de la humedad
+   humidity.textContent = `${weatherCurrentDay.humidity} %`;
+
+   // Añadimos los datos relativos al viento
+   wind[0].textContent = `${weatherCurrentDay.windKph} Km/h`;
+   wind[1].textContent = `${weatherCurrentDay.windDireccion}`;
+
+   // Añadimos la informacion para el amanecer|anochecer
+   sunsetSunrise[0].textContent = `${weatherCurrentDay.sunrise}`;
+   sunsetSunrise[1].textContent = `${weatherCurrentDay.sunset}`;
 }
 
 // Funcion principal, llama al resto de funciones y hace que funcione la APP
