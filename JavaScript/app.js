@@ -166,7 +166,7 @@ async function setImportantInfo() {
 // Funcion para pasar las fechas al formato Europeo
 function changeDateFormat(date) {
     const newDate = date.split('-');
-    return `${newDate[2]}-${newDate[1]}-${newDate[0]}`;
+    return `${newDate[2]}-${newDate[1]}`;
 }
 
 // Funcion para añadir los iconos del tiempo a los proximos 3 dias
@@ -197,13 +197,16 @@ async function addDataDOM() {
     const hourFrag = document.createDocumentFragment();
 
     nextHours.map((nextHour) => {
+        const divContainerNextHours = document.createElement('div');
+        divContainerNextHours.classList.add('container-next-hours')
         const liNextHours = document.createElement('li');
-
+        
         liNextHours.innerHTML = `
             <p>${nextHour.hour.split(' ')[1]}</p>
             <img src="${addIconsDescription(nextHour.weather)}"/>
         `;
-        hourFrag.append(liNextHours);
+        divContainerNextHours.append(liNextHours);
+        hourFrag.append(divContainerNextHours);
     });
 
     ulHours.append(hourFrag);

@@ -8,12 +8,15 @@
     </head>
     <body>
         <main>
+            <div class="background"></div>
             <div id="index">
                 <section class="currentWeather">
                     <div class="date">
                         <h1></h1>
-                        <h2></h2>
-                        <h3></h3>
+                        <div class="date-container">
+                            <h2></h2>
+                            <h3></h3>
+                        </div>
                     </div>                    
                     <div class="description">
                         <div id="temp"></div>
@@ -25,14 +28,17 @@
                     <ul class="nextHours"></ul>
                 </section>
 
-                <section>
+                <section class="last-section">
                     <h4>Próximos 3 días</h4>
                     <ul class="nextDays"></ul>
                 </section>
-
-                <button>
-                    <img src="../assets/expand-more.svg" alt="More Info">
-                </button>
+                <div class="hidden-button">
+                    <div class="container-button">
+                        <button>
+                            <img src="../assets/expand-more.svg" alt="More Info">
+                        </button>
+                    </div>
+                </div>
             </div>
         </main>
 
