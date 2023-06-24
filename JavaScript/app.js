@@ -12,6 +12,7 @@ const humidity = document.querySelector('.humidity p');
 const wind = document.querySelectorAll('.wind p');
 const sunsetSunrise = document.querySelectorAll('.sunset-sunrise p');
 const uv = document.querySelector('.uv p');
+const backgroundApp = document.querySelector('.currentWeather');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,63 +31,76 @@ const forecastIcons = [
     {
         name: ['Soleado'],
         img: '../assets/sunny.svg',
-        imgBack: '../assets/sun.png'
+        imgBack: '../assets/background/sun.png'
     },
     {
         name: ['Despejado'],
-        img: '../assets/moon.svg'
+        img: '../assets/moon.svg',
+        imgBack: '../assets/background/moon.png'
     },
     {
         name: ['Parcialmente nublado'],
-        img: '../assets/daily-cloudy.svg'
+        img: '../assets/daily-cloudy.svg',
+        imgBack: '../assets/background/party-cloud.png'
     },
     {
         name: ['Nublado', 'Cielo cubierto'],
-        img: '../assets/cloud.svg'
+        img: '../assets/cloud.svg',
+        imgBack: '../assets/background/cloud.png'
     },
     {
         name: ['Neblina', 'Niebla moderada', 'Niebla helada'],
-        img: '../assets/fog.svg'
+        img: '../assets/fog.svg',
+        imgBack: '../assets/background/fog.png'
     },
     {
         name: ['Lluvia  moderada a intervalos', 'Llovizna a intervalos', 'Lluvias ligeras a intervalos', 'Periodos de lluvia moderada',
                 'Periodos de fuertes lluvias', 'Ligeras precipitaciones', 'Lluvias fuertes o moderadas', 'Lluvias torrenciales',
                 'Ligeros chubascos de aguanieve', 'Chubascos de aguanieve fuertes o moderados'],
-        img: '../assets/interval-rain.svg'
+        img: '../assets/interval-rain.svg',
+        imgBack: '../assets/background/interval-rain.png'
     },
     {
         name: ['Nieve moderada a intervalos en las aproximaciones', 'Aguanieve moderada a intervalos en las aproximaciones', 'Llovizna helada a intervalos en las aproximaciones',
                 'Chubascos de nieve', 'Nevadas ligeras a intervalos', 'Nieve moderada a intervalos'],
-        img: '../assets/interval-snow.svg'
+        img: '../assets/interval-snow.svg',
+        imgBack: '../assets/background/interval-snow.png'
     },
     {
         name: ['Cielos tormentosos en las aproximaciones'],
-        img: '../assets/thunderstorm.svg'
+        img: '../assets/thunderstorm.svg',
+        imgBack: '../assets/background/storm.png'
     },
     {
         name: ['Ventisca'],
-        img: '../assets/wind.svg'
+        img: '../assets/wind.svg',
+        imgBack: '../assets/background/wind.png'
     },
     {
         name: ['Llovizna', 'Llovizna helada', 'Fuerte llovizna helada', 'Ligeras  lluvias', 'Lluvia moderada', 'Fuertes lluvias', 'Ligeras lluvias heladas', 'Lluvias heladas fuertes o moderadas', 
                 'Ligeras precipitaciones de aguanieve', 'Aguanieve fuerte o moderada'],
-        img: '../assets/rain.svg'
+        img: '../assets/rain.svg',
+        imgBack: '../assets/background/rain.png'
     },
     {
         name: ['Nevadas  ligeras', 'Nieve moderada', 'Nevadas intensas', 'Fuertes nevadas', 'Ligeras precipitaciones de nieve', 'Chubascos de nieve fuertes o moderados'],
-        img: '../assets/snow.svg'
+        img: '../assets/snow.svg',
+        imgBack: '../assets/background/snow.png'
     },
     {
         name: ['Granizo', 'Ligeros chubascos acompañados de granizo', 'Chubascos fuertes o moderados acompañados de granizo'],
-        img: '../assets/sleet.svg'
+        img: '../assets/sleet.svg',
+        imgBack: '../assets/background/rain.png'
     },
     {
         name: ['Intervalos de lluvias ligeras con tomenta en la región', 'Lluvias con tormenta fuertes o moderadas en la región'],
-        img: '../assets/day-storm-rain.svg'
+        img: '../assets/day-storm-rain.svg',
+        imgBack: '../assets/background/day-storm-rain.png'
     },
     {
         name: ['Nieve moderada con tormenta en la región', 'Nieve moderada o fuertes nevadas con tormenta en la región'],
         img: '../assets/day-storm-snow.svg',
+        imgBack: '../assets/background/day-storm-snow.png'
     }
 ]
 
@@ -121,7 +135,7 @@ async function setImportantInfo() {
         localtime: weatherInfo.location.localtime.split(' ')[1],
         localdate: changeDateFormat(weatherInfo.location.localtime.split(' ')[0]),
         description: weatherInfo.current.condition.text,
-        temp: weatherInfo.current.temp_c,
+        temp: Math.round(weatherInfo.current.temp_c),
         humidity: weatherInfo.current.humidity,
         windDireccion: weatherInfo.current.wind_dir,
         windKph: weatherInfo.current.wind_kph,
@@ -188,12 +202,32 @@ function addIconsDescription(weather) {
     return matchIcons;
 };
 
+// Funcion para añadir en el fondo el icono del tiempo actual
+function addIconBackground(weather) {
+    let iconBackground = '';
+    forecastIcons.map((icon) => {
+        icon.name.map((description) => {
+            if(description === weather) {
+                iconBackground = icon.imgBack;
+            }
+        })
+    })
+    return iconBackground;
+}
+
 // Funcion para añadir los datos al DOM
 async function addDataDOM() {
-    // Añadimos ubicacion, fecha y hora actual
+    // Añadimos ubicacion, fecha y hora
     h1.textContent = weatherCurrentDay.city;
     h2.textContent = weatherCurrentDay.localtime;
     h3.textContent = weatherCurrentDay.localdate;
+
+    // Añadimos el icono de fondo del tiempo actual
+    backgroundApp.style.background = `url(${addIconBackground(weatherCurrentDay.description)})`;
+    backgroundApp.style.backgroundRepeat = 'no-repeat';
+    backgroundApp.style.backgroundPosition = '20% 90%';
+    backgroundApp.style.backgroundSize =  '9rem';
+    
 
     // Añadimos la temperatura actual y una breve descripcion del tiempo
     temp.textContent = weatherCurrentDay.temp + ' °C';

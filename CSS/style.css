@@ -36,10 +36,6 @@ main {
     width: 100%;
     height: 16rem;
     margin-bottom: 1rem;
-    background: url(../assets/background/sun.png);
-    background-repeat: no-repeat;
-    background-position: 20% 90%;
-    background-size: 9rem;
 }
 
 .date {
