@@ -119,7 +119,7 @@ function getUserLocation() {
 // Funcion para obtener los datos de la API
 async function getWeatherData() {
     await getUserLocation();
-    const response = await fetch(urlApi + apiKey + /*locationUser*/ '&q=Tokio' + params);
+    const response = await fetch(urlApi + apiKey + locationUser + params);
     const weatherData = await response.json();
 
     return weatherData;
