@@ -204,30 +204,138 @@ button {
 
 /* MORE INFO */
 div.moreInfo {
-    height: 50vh;
     background-color: var(--mainColor);
     border: 1px solid var(--mainColor);
     opacity: 0.8;
     color: #dfdce7;
-    gap: 1rem;
     font-family: 'Lato', sans-serif;
+    /*display: none;*/
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .moreInfo article {
-    width: 100%;
-    display: flex;
+    background-color: #ffffff38;
 }
 
 .sunset-sunrise {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 30% 20% 30%;
+    grid-template-rows: repeat(2, 1fr);
+    margin-top: 0.8rem;
+    margin-bottom: 1rem;
+    width: 90%;
+    justify-content: center;  
+    border-radius: 10px;
+    gap: 1rem;
+    padding: 0.5rem;
 }
 
-.sunset-sunrise div {
+.sunset-sunrise > div:nth-child(1) {
     display: flex;
+    align-items: center;
+    justify-content: space-around;
+    grid-area: 1/1/2/4;
+    border-radius: 10px;
+}
+
+.sunset-sunrise > div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    grid-area: 2/1/3/4;
+    padding-right: 0.3rem;
 }
 
 .moreInfo article h2 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     justify-content: left;
+}
+
+.container-tempAndUv, .container-uvHum {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+}
+
+.container-tempAndUv article, .container-uvHum article {
+    width: 48%;
+    border-radius: 10px;
+}
+
+.temperatures {
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1rem 1rem 0;
+}
+
+.dayTemperatures {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.uv {
+    display: flex;
+    padding-right: 0;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.uv img, .humidity img, .temperatures img, .wind img, .sunset-sunrise img {
+    width: 50px;
+    height: 50px;
+}
+
+.uv p, .humidity p {
+    font-size: 3rem;
+    font-weight: 300;
+}
+
+.uv h2 {
+    height: 53%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.humidity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+}
+
+.humidity div {
+    display: flex;
+    width: 100%;
+}
+
+.humidity h2, .wind h2 {
+    align-items: center;
+}
+
+.container-titleWind {
+    display: flex;
+}
+
+.container-windInfo {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 1rem;
+}
+
+.wind > p {
+    display: flex;
+    font-size: 2rem;
+    justify-content: center;
+}
+
+h5, .container-windInfo p {
+    font-size: 0.7rem;
 }
