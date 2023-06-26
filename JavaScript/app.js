@@ -6,13 +6,19 @@ const h3 = document.querySelector('h3');
 const temp = document.querySelector('#temp');
 const hourParagraph = document.querySelector('.hourParagraph');
 const ulHours = document.querySelector('.nextHours');
-const ulDays = document.querySelector('.nextDays')
+const ulDays = document.querySelector('.nextDays');
+const moreInfo = document.querySelector('.moreInfo');
 const temperatures = document.querySelectorAll('.dayTemperatures p');
 const humidity = document.querySelector('.humidity p');
 const wind = document.querySelectorAll('.wind p');
 const sunsetSunrise = document.querySelectorAll('.sunset-sunrise p');
 const uv = document.querySelector('.uv p');
 const backgroundApp = document.querySelector('.currentWeather');
+const button = document.querySelector('button');
+const buttonImg = document.querySelector('.button-img');
+const lastSection = document.querySelector('.last-section');
+const background = document.querySelector('.background');
+const containerCurrentInfo = document.querySelector('.container-currentInfo');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -25,6 +31,7 @@ let weatherCurrentDay = {};
 let nextDays = [];
 let weatherPerHours;
 let nextHours = [];
+let windowMoreInfo = false;
 
 // Creamos un array para poder determinar segun el tiempo que haga el icono que le corresponde
 const forecastIcons = [
@@ -215,6 +222,23 @@ function addIconBackground(weather) {
     return iconBackground;
 }
 
+// Funcionalidad del boton
+function handleClickButton() {
+    windowMoreInfo = !windowMoreInfo;
+    if(windowMoreInfo === true) {
+        moreInfo.style.display = 'flex';
+        buttonImg.setAttribute('src', './assets/expand-less.svg');
+        lastSection.style.borderRadius = '0px 0px 0px 0px';
+        containerCurrentInfo.style.display = 'none';
+   } else {
+        moreInfo.style.display = 'none';
+        buttonImg.setAttribute('src', './assets/expand-more.svg');
+        lastSection.style.borderRadius = '30px 30px 0 0';
+        containerCurrentInfo.style.display = 'flex';
+        containerCurrentInfo.style.flexDirection = 'column';
+   }   
+}
+
 // Funcion para añadir los datos al DOM
 async function addDataDOM() {
     // Añadimos ubicacion, fecha y hora
@@ -233,7 +257,7 @@ async function addDataDOM() {
     temp.textContent = weatherCurrentDay.temp + ' °C';
     hourParagraph.textContent = weatherCurrentDay.description;
 
-    // Añadimos el tiempo paralas 5 horas siguientes a la actual
+    // Añadimos el tiempo para las 5 horas siguientes a la actual
     const hourFrag = document.createDocumentFragment();
 
     nextHours.map((nextHour) => {
@@ -255,37 +279,40 @@ async function addDataDOM() {
    const nextDaysFrag = document.createDocumentFragment();
    
    nextDays.map((nextDay) => {
-    const liNextDays = document.createElement('li');
-
-    liNextDays.innerHTML = `
-        <p>${changeDateFormat(nextDay.date).replace('-', '/').split('-')[0]}</p>
-        <img src="${addIconsDescription(nextDay.weather)}" alt="Weather Icon"/>
+       const liNextDays = document.createElement('li');
+       
+       liNextDays.innerHTML = `
+       <p>${changeDateFormat(nextDay.date).replace('-', '/').split('-')[0]}</p>
+       <img src="${addIconsDescription(nextDay.weather)}" alt="Weather Icon"/>
         <p>${nextDay.maxTemp}</p>
         <p>${nextDay.minTemp}</p>
     `;
     nextDaysFrag.append(liNextDays);
    });
 
-    ulDays.append(nextDaysFrag);
-    
-    // Añadimos la informacion del article de temperaturas
+   ulDays.append(nextDaysFrag);
+   
+   // Añadimos la informacion del article de temperaturas
    temperatures[0].textContent = `${Math.round(weatherCurrentDay.maxTemp)} °C`;
    temperatures[1].textContent = `${Math.round(weatherCurrentDay.minTemp)} °C`;
-
-   // Añadimos la informacion relativa a UV
-   uv.textContent = `${weatherCurrentDay.uv}`;
-
-   // Añadimos la informacion de la humedad
-   humidity.textContent = `${weatherCurrentDay.humidity} %`;
-
-   // Añadimos los datos relativos al viento
-   wind[0].textContent = `${weatherCurrentDay.windKph} Km/h`;
-   wind[1].textContent = `${weatherCurrentDay.windDireccion}`;
-
+   
    // Añadimos la informacion para el amanecer|anochecer
    sunsetSunrise[0].textContent = `${weatherCurrentDay.sunrise}`;
    sunsetSunrise[1].textContent = `${weatherCurrentDay.sunset}`;
+
+   // Añadimos la informacion relativa a UV
+   uv.textContent = `${weatherCurrentDay.uv}`;
+   
+   // Añadimos la informacion de la humedad
+   humidity.textContent = `${weatherCurrentDay.humidity} %`;
+   
+   // Añadimos los datos relativos al viento
+   wind[0].textContent = `${weatherCurrentDay.windKph} Km/h`;
+   wind[1].textContent = `${weatherCurrentDay.windDireccion}`;
 }
+
+// Listeners
+button.addEventListener('click', handleClickButton);
 
 // Funcion principal, llama al resto de funciones y hace que funcione la APP
 async function weatherApp() {
