@@ -7,26 +7,75 @@
 }
 
 main {
-    background-color: transparent;
     --mainColor :#5c557c;
+    display: none;
+}
+
+.main-container {
+    background-color:#99c3ff;
+    background-blend-mode: hard-light;
+    opacity: 0.3;
+    height: 100vh;
 }
 
 .background {
     background-color:#99c3ff;
     background-blend-mode: hard-light;
     filter: opacity(0.3);
-
     position: absolute;
     z-index: -1;
     height: 100vh;
     width: 100vw;
 }
 
-/* CURRENT WEATHER */
-.container-currentInfo {
-    transition: transform 3s ease-in;
+/* GEOLOCALIZACION */
+.geolocation {
+    position: absolute;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.466);
+    width: 80%;
+    height: 30%;
+    top: 35vh;
+    right: 5.5vh;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: 'Lato', sans-serif;
+    color: #5c557c;
+    background-image: url(../assets/background/background-loc.png);
+    background-repeat: no-repeat;
+    background-position-x: 80%;
+    background-position-y: 43%;
+    box-shadow: #5c557c60 0px 25px 200px 0px;
 }
 
+.geolocation > div {
+    height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+}
+
+.geolocButtons {
+    display: flex;
+    gap: 2rem;
+    font-family: 'Lato', sans-serif;
+}
+
+.geolocBut {
+    background-color: #5c557c;
+    border: none;
+    color: #dfdce7;
+    width: 6rem;
+    height: 2rem;
+    border-radius: 10px;
+}
+/* CURRENT WEATHER */
 #index {
     display: flex;
     flex-direction: column;
@@ -197,7 +246,7 @@ img {
     opacity: 0.8;
 }
 
-button {
+.button-moreInfo {
     background-color: transparent;
     border: none;
     border-radius: 100%;
@@ -285,7 +334,7 @@ div.moreInfo {
     flex-direction: column;
     gap: 0.8rem;
 }
- /* UV */
+/* UV */
 .uv {
     display: flex;
     padding-right: 0;

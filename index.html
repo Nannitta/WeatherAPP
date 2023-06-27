@@ -8,6 +8,15 @@
     </head>
     <body>
         <div class="geolocation">
+            <div>
+                <p>Weather App necesita conocer tu localizacion</p>
+                    <div class="geolocButtons">
+                        <button class="geolocBut accept" >Aceptar</button>
+                        <button class="geolocBut cancel">Cancelar</button>
+                    </div>
+            </div>
+        </div>
+        <div class="main-container">
             <main>
                 <div class="background"></div>
                     <div id="index">
@@ -25,25 +34,25 @@
                                     <p class="hourParagraph"></p>
                                 </div>
                             </section>
-    
+                            
                             <section>
                                 <ul class="nextHours"></ul>
                             </section>
                         </div>
-
+                        
                         <section class="last-section">
                             <h4>Próximos 3 días</h4>
                             <ul class="nextDays"></ul>
                         </section>
                         <div class="hidden-button">
                             <div class="container-button">
-                                <button>
+                                <button class="button-moreInfo">
                                     <img src="./assets/expand-more.svg" alt="More Info" class="button-img">
                                 </button>
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="moreInfo">                        
                         <article class="sunset-sunrise">
                             <div>
@@ -57,40 +66,40 @@
                                 <p></p>
                             </div>
                         </article>  
-                    
+                        
                         <div class="container-tempAndUv">
-                        <article class="temperatures">
+                            <article class="temperatures">
                                 <img src="./assets/temperature.svg" alt="Temp">
                                 <div class="dayTemperatures">
                                     <h2>Max</h2>
                                     <h2>Min</h2>
                                 </div>
-                            <div class="dayTemperatures">
-                                <p></p>
-                                <p></p>
-                            </div>
-                        </article>
-                        
-
+                                <div class="dayTemperatures">
+                                    <p></p>
+                                    <p></p>
+                                </div>
+                            </article>
+                            
+                            
                         <article class="uv">
                             <img src="./assets/uv.svg" alt="UV">
                             <p></p>
                             <h2>UV</h2>
                         </article>
-                        </div>
-
-                        <div class="container-uvHum">
+                    </div>
+                    
+                    <div class="container-uvHum">
                         <article class="humidity">
                             <div>
-                            <img src="./assets/humidity.svg" alt="Humidity Icon">
-                            <h2>Humidity</h2>
+                                <img src="./assets/humidity.svg" alt="Humidity Icon">
+                                <h2>Humidity</h2>
                             </div>
                             <p></p>
                         </article>
-
+                        
                         <article class="wind">
                             <div class="container-titleWind">
-                            <img src="./assets/wind2.svg" alt="Wind Icon">
+                                <img src="./assets/wind2.svg" alt="Wind Icon">
                                 <h2>Wind</h2>
                             </div>
                             <p></p>                             
@@ -99,11 +108,10 @@
                                 <p></p>
                             </div>
                         </article>
-                        </div>
                     </div>
+                </div>
             </main>
-        </div>  
-
+        </div>
         <script src="./JavaScript/app.js"></script>
     </body>
 </html>
