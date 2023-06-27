@@ -14,11 +14,12 @@ const wind = document.querySelectorAll('.wind p');
 const sunsetSunrise = document.querySelectorAll('.sunset-sunrise p');
 const uv = document.querySelector('.uv p');
 const backgroundApp = document.querySelector('.currentWeather');
-const button = document.querySelector('button');
+const buttonMoreInfo = document.querySelector('.button-moreInfo');
 const buttonImg = document.querySelector('.button-img');
 const lastSection = document.querySelector('.last-section');
 const background = document.querySelector('.background');
 const containerCurrentInfo = document.querySelector('.container-currentInfo');
+const acceptButton = document.querySelector('.accept');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -32,6 +33,7 @@ let nextDays = [];
 let weatherPerHours;
 let nextHours = [];
 let windowMoreInfo = false;
+let geolocationConfirm = false;
 
 // Creamos un array para poder determinar segun el tiempo que haga el icono que le corresponde
 const forecastIcons = [
@@ -112,6 +114,8 @@ const forecastIcons = [
 ]
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Funcionalidad de los botones de geolocalizacion
 
 // Funcion para geolocalizacion del usuario
 function getUserLocation() {
@@ -222,7 +226,7 @@ function addIconBackground(weather) {
     return iconBackground;
 }
 
-// Funcionalidad del boton
+// Funcionalidad del boton moreInfo
 function handleClickButton() {
     windowMoreInfo = !windowMoreInfo;
     if(windowMoreInfo === true) {
@@ -312,7 +316,7 @@ async function addDataDOM() {
 }
 
 // Listeners
-button.addEventListener('click', handleClickButton);
+buttonMoreInfo.addEventListener('click', handleClickButton);
 
 // Funcion principal, llama al resto de funciones y hace que funcione la APP
 async function weatherApp() {
