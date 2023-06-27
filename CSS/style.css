@@ -46,22 +46,48 @@ main {
     color: #5c557c;
     background-image: url(../assets/background/background-loc.png);
     background-repeat: no-repeat;
-    background-position-x: 80%;
+    background-position-x: 90%;
     background-position-y: 50%;
     box-shadow: #5c557c60 0px 25px 200px 0px;
 }
 
 .geolocation > div {
     height: 100%;
-    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    gap: 4rem;
+    gap: 1rem;
+}
+
+.geolocationParagraph {
+    padding-bottom: 0.5rem;
+    padding-top: 1.5rem;
+}
+
+.input-container {
+    width: 10rem;
+    border-bottom: 1px solid #5c557c6b;
+}
+
+.inputLocation {
+    background: none;
+    border: none;
+    width: 10rem;
+    height: 1.5rem;
+    color: #5c557c;
+}
+
+.inputLocation::placeholder {
+    color: #5c557c6b;
+}
+
+.inputLocation:focus {
+    outline: none;
+    background-color: none;
 }
 
 .geolocButtons {
+    margin-top: 0.5rem;
     display: flex;
     gap: 2rem;
     font-family: 'Lato', sans-serif;

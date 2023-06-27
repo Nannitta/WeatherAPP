@@ -145,7 +145,7 @@ function handleClickCancel() {
 cancelButton.addEventListener('click', handleClickCancel);
 
 function handleClickBack() {
-    geolocationParagraph.textContent = 'Weather App necesita conocer tu localizacion';
+    geolocationParagraph.textContent = 'Introduce tu ubicación :';
     acceptButton.style.display = 'initial';
     cancelButton.style.display = 'initial';
     back.style.display = 'none';
