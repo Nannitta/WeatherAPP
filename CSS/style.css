@@ -47,7 +47,7 @@ main {
     background-image: url(../assets/background/background-loc.png);
     background-repeat: no-repeat;
     background-position-x: 80%;
-    background-position-y: 43%;
+    background-position-y: 50%;
     box-shadow: #5c557c60 0px 25px 200px 0px;
 }
 
@@ -75,6 +75,11 @@ main {
     height: 2rem;
     border-radius: 10px;
 }
+
+.back {
+    display: none;
+}
+
 /* CURRENT WEATHER */
 #index {
     display: flex;
