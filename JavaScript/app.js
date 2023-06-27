@@ -122,20 +122,22 @@ const forecastIcons = [
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Funcionalidad de los botones de geolocalizacion
-function handleClickAccept() {
+async function handleClickAccept() {
+    await getUserLocation();
     geolocationConfirm = !geolocationConfirm;
     geolocationDiv.style.display = 'none';
     main.style.display = 'initial';
     mainContainer.style.opacity = 'initial';
     mainContainer.style.backgroundColor = 'initial';
     mainContainer.style.backgroundBlendMode = 'initial';
+    await weatherApp();
 }
 
 acceptButton.addEventListener('click', handleClickAccept);
 
 function handleClickCancel() {
-    geolocationParagraph.textContent = 'Oops! No hemos podido acceder a tu geolocalización';
-    acceptButton.style.display = 'none';
+    geolocationParagraph.textContent = 'Oops! No hemos podido acceder a tu localización';
+    acceptButton.style.display = 'none';    
     cancelButton.style.display = 'none';
     back.style.display = 'initial';
 }
@@ -152,26 +154,29 @@ function handleClickBack() {
 back.addEventListener('click', handleClickBack);
 
 // Funcion para geolocalizacion del usuario
-function getUserLocation() {
+async function getUserLocation() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition((position) => {
             locationUser = `&q=${position.coords.latitude},${position.coords.longitude}`;
             resolve();
-    }, reject);
+        }, reject);
     });
 }
 
 // Funcion para obtener los datos de la API
 async function getWeatherData() {
-    await getUserLocation();
-    const response = await fetch(urlApi + apiKey + locationUser + params);
-    const weatherData = await response.json();
-
-    return weatherData;
+        const response = await fetch(urlApi + apiKey + locationUser + params);
+        const weatherData = await response.json();
+    
+        return weatherData;
 }
 
 // Obtenemos solo los datos necesarios
 async function setImportantInfo() {
+    while(locationUser === '') {
+        console.log('Location is loading');
+    }
+        
     weatherInfo = await getWeatherData();
 
     // Datos generales del dia actual
@@ -358,4 +363,4 @@ async function weatherApp() {
     await addDataDOM();
 }
 
-weatherApp();
+//weatherApp();
