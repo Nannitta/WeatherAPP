@@ -20,6 +20,12 @@ const lastSection = document.querySelector('.last-section');
 const background = document.querySelector('.background');
 const containerCurrentInfo = document.querySelector('.container-currentInfo');
 const acceptButton = document.querySelector('.accept');
+const geolocationDiv = document.querySelector('.geolocation');
+const main = document.querySelector('main');
+const mainContainer = document.querySelector('.main-container');
+const cancelButton = document.querySelector('.cancel');
+const geolocationParagraph = document.querySelector('.geolocationParagraph');
+const back = document.querySelector('.back');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -116,6 +122,34 @@ const forecastIcons = [
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Funcionalidad de los botones de geolocalizacion
+function handleClickAccept() {
+    geolocationConfirm = !geolocationConfirm;
+    geolocationDiv.style.display = 'none';
+    main.style.display = 'initial';
+    mainContainer.style.opacity = 'initial';
+    mainContainer.style.backgroundColor = 'initial';
+    mainContainer.style.backgroundBlendMode = 'initial';
+}
+
+acceptButton.addEventListener('click', handleClickAccept);
+
+function handleClickCancel() {
+    geolocationParagraph.textContent = 'Oops! No hemos podido acceder a tu geolocalización';
+    acceptButton.style.display = 'none';
+    cancelButton.style.display = 'none';
+    back.style.display = 'initial';
+}
+
+cancelButton.addEventListener('click', handleClickCancel);
+
+function handleClickBack() {
+    geolocationParagraph.textContent = 'Weather App necesita conocer tu localizacion';
+    acceptButton.style.display = 'initial';
+    cancelButton.style.display = 'initial';
+    back.style.display = 'none';
+}
+
+back.addEventListener('click', handleClickBack);
 
 // Funcion para geolocalizacion del usuario
 function getUserLocation() {
