@@ -26,6 +26,9 @@ const mainContainer = document.querySelector('.main-container');
 const cancelButton = document.querySelector('.cancel');
 const geolocationParagraph = document.querySelector('.geolocationParagraph');
 const back = document.querySelector('.back');
+const input = document.querySelector('input');
+const inputContainer = document.querySelector('.input-container');
+const geolocButtons = document.querySelector('.geolocButtons');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -39,7 +42,6 @@ let nextDays = [];
 let weatherPerHours;
 let nextHours = [];
 let windowMoreInfo = false;
-let geolocationConfirm = false;
 
 // Creamos un array para poder determinar segun el tiempo que haga el icono que le corresponde
 const forecastIcons = [
@@ -123,13 +125,13 @@ const forecastIcons = [
 
 // Funcionalidad de los botones de geolocalizacion
 async function handleClickAccept() {
-    await getUserLocation();
-    geolocationConfirm = !geolocationConfirm;
+    /* await getUserLocation(); */
     geolocationDiv.style.display = 'none';
     main.style.display = 'initial';
     mainContainer.style.opacity = 'initial';
     mainContainer.style.backgroundColor = 'initial';
     mainContainer.style.backgroundBlendMode = 'initial';
+    locationUser = input.value;
     await weatherApp();
 }
 
@@ -137,9 +139,12 @@ acceptButton.addEventListener('click', handleClickAccept);
 
 function handleClickCancel() {
     geolocationParagraph.textContent = 'Oops! No hemos podido acceder a tu localización';
+    geolocationParagraph.classList.add('cancelLocation');
     acceptButton.style.display = 'none';    
     cancelButton.style.display = 'none';
     back.style.display = 'initial';
+    input.style.display ='none';
+    inputContainer.style.border = 'none';
 }
 
 cancelButton.addEventListener('click', handleClickCancel);
@@ -149,23 +154,26 @@ function handleClickBack() {
     acceptButton.style.display = 'initial';
     cancelButton.style.display = 'initial';
     back.style.display = 'none';
+    input.style.display = 'initial';
+    inputContainer.style.borderBottom = '1px solid  #5c557c6b';
+    geolocButtons.style.display = 'flex';
 }
 
 back.addEventListener('click', handleClickBack);
 
 // Funcion para geolocalizacion del usuario
-async function getUserLocation() {
+/* async function getUserLocation() {
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition((position) => {
             locationUser = `&q=${position.coords.latitude},${position.coords.longitude}`;
             resolve();
         }, reject);
     });
-}
+} */
 
 // Funcion para obtener los datos de la API
 async function getWeatherData() {
-        const response = await fetch(urlApi + apiKey + locationUser + params);
+        const response = await fetch(urlApi + apiKey + '&q=' + locationUser + params);
         const weatherData = await response.json();
     
         return weatherData;
@@ -173,10 +181,6 @@ async function getWeatherData() {
 
 // Obtenemos solo los datos necesarios
 async function setImportantInfo() {
-    while(locationUser === '') {
-        console.log('Location is loading');
-    }
-        
     weatherInfo = await getWeatherData();
 
     // Datos generales del dia actual
@@ -362,5 +366,3 @@ async function weatherApp() {
     await setImportantInfo();
     await addDataDOM();
 }
-
-//weatherApp();
