@@ -47,7 +47,7 @@ main {
     background-image: url(../assets/background/background-loc.png);
     background-repeat: no-repeat;
     background-position-x: 90%;
-    background-position-y: 50%;
+    background-position-y: 55%;
     box-shadow: #5c557c60 0px 25px 200px 0px;
 }
 
@@ -86,9 +86,15 @@ main {
     background-color: none;
 }
 
+.cancelLocation {
+    display: flex;
+    text-align: center;
+}
+
 .geolocButtons {
     margin-top: 0.5rem;
     display: flex;
+    justify-content: center;
     gap: 2rem;
     font-family: 'Lato', sans-serif;
 }
