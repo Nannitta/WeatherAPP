@@ -11,10 +11,10 @@
             <div>
                 <p class="geolocationParagraph">Introduce tu ubicación :</p>
                 <div class="input-container">
-                    <input type="text" id="location" name="location" class="inputLocation" placeholder="Madrid,ES">
+                    <input type="text" id="location" name="location" class="inputLocation" placeholder="Madrid,ES" onkeyup="handleOneKeyUp()">
                 </div>
                     <div class="geolocButtons">
-                        <button class="geolocBut accept" >Aceptar</button>
+                        <button class="geolocBut accept" disabled>Aceptar</button>
                         <button class="geolocBut cancel">Cancelar</button>
                         <button class="geolocBut back">Volver</button>
                     </div>

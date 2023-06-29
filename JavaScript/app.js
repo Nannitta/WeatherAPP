@@ -124,8 +124,13 @@ const forecastIcons = [
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Funcionalidad de los botones de geolocalizacion
+function handleOneKeyUp() {
+    const inputValue = input.value;
+    acceptButton.removeAttribute('disabled');
+    return inputValue;
+}
+
 async function handleClickAccept() {
-    /* await getUserLocation(); */
     geolocationDiv.style.display = 'none';
     main.style.display = 'initial';
     mainContainer.style.opacity = 'initial';
@@ -134,8 +139,6 @@ async function handleClickAccept() {
     locationUser = input.value;
     await weatherApp();
 }
-
-acceptButton.addEventListener('click', handleClickAccept);
 
 function handleClickCancel() {
     geolocationParagraph.textContent = 'Oops! No hemos podido acceder a tu localización';
@@ -147,8 +150,6 @@ function handleClickCancel() {
     inputContainer.style.border = 'none';
 }
 
-cancelButton.addEventListener('click', handleClickCancel);
-
 function handleClickBack() {
     geolocationParagraph.textContent = 'Introduce tu ubicación :';
     acceptButton.style.display = 'initial';
@@ -159,17 +160,54 @@ function handleClickBack() {
     geolocButtons.style.display = 'flex';
 }
 
-back.addEventListener('click', handleClickBack);
+// Funcionalidad del boton moreInfo
+function handleClickButton() {
+    windowMoreInfo = !windowMoreInfo;
+    if(windowMoreInfo === true) {
+        moreInfo.style.display = 'flex';
+        buttonImg.setAttribute('src', './assets/expand-less.svg');
+        lastSection.style.borderRadius = '0px 0px 0px 0px';
+        containerCurrentInfo.style.display = 'none';
+   } else {
+        moreInfo.style.display = 'none';
+        buttonImg.setAttribute('src', './assets/expand-more.svg');
+        lastSection.style.borderRadius = '30px 30px 0 0';
+        containerCurrentInfo.style.display = 'flex';
+        containerCurrentInfo.style.flexDirection = 'column';
+   }   
+}
 
-// Funcion para geolocalizacion del usuario
-/* async function getUserLocation() {
-    return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            locationUser = `&q=${position.coords.latitude},${position.coords.longitude}`;
-            resolve();
-        }, reject);
-    });
-} */
+// Funcion para pasar las fechas al formato Europeo
+function changeDateFormat(date) {
+    const newDate = date.split('-');
+    return `${newDate[2]}-${newDate[1]}`;
+}
+
+// Funcion para añadir los iconos del tiempo a los proximos 3 dias
+function addIconsDescription(weather) {
+    let matchIcons = [];
+    forecastIcons.map((icon) => {
+        icon.name.map((description) => {
+            if(description === weather) {
+                matchIcons.push(icon.img);
+            }
+        })
+    })
+    return matchIcons;
+};
+
+// Funcion para añadir en el fondo el icono del tiempo actual
+function addIconBackground(weather) {
+    let iconBackground = '';
+    forecastIcons.map((icon) => {
+        icon.name.map((description) => {
+            if(description === weather) {
+                iconBackground = icon.imgBack;
+            }
+        })
+    })
+    return iconBackground;
+}
 
 // Funcion para obtener los datos de la API
 async function getWeatherData() {
@@ -225,8 +263,11 @@ async function setImportantInfo() {
     // Datos de las proximas cinco horas
     weatherPerHours = weatherInfo.forecast.forecastday[0].hour;
     let counter = 0;
+    if(weatherCurrentDay.localtime.split(':')[0] < 10) {
+        weatherCurrentDay.localtime = '0' + weatherCurrentDay.localtime;
+    }
     for(const hour of weatherPerHours) {
-        if(hour.time > weatherInfo.location.localtime && counter !== 5) {
+        if(hour.time.split(' ')[1] > weatherCurrentDay.localtime && counter !== 5) {
             const weatherDay = {
                 weather: hour.condition.text,
                 hour: hour.time,
@@ -235,55 +276,6 @@ async function setImportantInfo() {
             counter++;
         }
     }
-}
-
-// Funcion para pasar las fechas al formato Europeo
-function changeDateFormat(date) {
-    const newDate = date.split('-');
-    return `${newDate[2]}-${newDate[1]}`;
-}
-
-// Funcion para añadir los iconos del tiempo a los proximos 3 dias
-function addIconsDescription(weather) {
-    let matchIcons = [];
-    forecastIcons.map((icon) => {
-        icon.name.map((description) => {
-            if(description === weather) {
-                matchIcons.push(icon.img);
-            }
-        })
-    })
-    return matchIcons;
-};
-
-// Funcion para añadir en el fondo el icono del tiempo actual
-function addIconBackground(weather) {
-    let iconBackground = '';
-    forecastIcons.map((icon) => {
-        icon.name.map((description) => {
-            if(description === weather) {
-                iconBackground = icon.imgBack;
-            }
-        })
-    })
-    return iconBackground;
-}
-
-// Funcionalidad del boton moreInfo
-function handleClickButton() {
-    windowMoreInfo = !windowMoreInfo;
-    if(windowMoreInfo === true) {
-        moreInfo.style.display = 'flex';
-        buttonImg.setAttribute('src', './assets/expand-less.svg');
-        lastSection.style.borderRadius = '0px 0px 0px 0px';
-        containerCurrentInfo.style.display = 'none';
-   } else {
-        moreInfo.style.display = 'none';
-        buttonImg.setAttribute('src', './assets/expand-more.svg');
-        lastSection.style.borderRadius = '30px 30px 0 0';
-        containerCurrentInfo.style.display = 'flex';
-        containerCurrentInfo.style.flexDirection = 'column';
-   }   
 }
 
 // Funcion para añadir los datos al DOM
@@ -360,6 +352,9 @@ async function addDataDOM() {
 
 // Listeners
 buttonMoreInfo.addEventListener('click', handleClickButton);
+acceptButton.addEventListener('click', handleClickAccept);
+cancelButton.addEventListener('click', handleClickCancel);
+back.addEventListener('click', handleClickBack);
 
 // Funcion principal, llama al resto de funciones y hace que funcione la APP
 async function weatherApp() {
