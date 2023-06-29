@@ -108,6 +108,10 @@ main {
     border-radius: 10px;
 }
 
+.accept:disabled {
+    background-color: #5c557cb0;
+}
+
 .back {
     display: none;
 }
@@ -432,4 +436,82 @@ div.moreInfo {
 
 h5, .container-windInfo p {
     font-size: 0.7rem;
+}
+
+@media (min-height: 850px) {
+    #index {
+        height: 100%;
+    }
+
+    .container-currentInfo {
+        margin-top: 3rem;
+    }
+
+    .currentWeather {
+        margin-bottom: 3rem;
+    }
+
+    .nextHours {
+        margin-bottom: 5rem;
+    }
+
+    .last-section {
+        height: 39%;
+    }
+
+    h4 {
+        padding: 3rem 0 1rem 2.3rem;
+    }
+
+    .nextDays {
+        padding-top: 2rem;
+    }
+
+    .moreInfo {
+        position: absolute;
+        top: 44.4%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .nextDays li img {
+        margin-left: 1.3rem;
+    }
+}
+
+@media (min-width: 485px) {
+    div.geolocation {
+        width: 388px;
+        right: 22vw;
+    }
+}
+
+@media (min-width: 750px) and (max-width: 1080px) {
+    .container-currentInfo {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+
+    .nextHours {
+        gap: 3rem;
+    }
+
+    .nextDays {
+        margin-left: 7rem;
+        margin-right: 7rem;
+    }
+
+    h4 {
+        margin-left: 7.5rem;
+    }
+
+    .container-button {
+        bottom: -5px;
+        left: 40%;
+        width: 20%;
+    }
+}
+
+@media (min-width: 1081px) {
+
 }
