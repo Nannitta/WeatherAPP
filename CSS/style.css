@@ -513,5 +513,45 @@ h5, .container-windInfo p {
 }
 
 @media (min-width: 1081px) {
+    .geolocation {
+        right: 40vw;
+    }
 
+    .currentWeather {
+        width: 50%;
+        padding: 1rem 10rem 0 10rem;
+    }
+
+    .nextHours {
+        width: 50%;
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .last-section {
+        width: 36.5%;
+        border-radius: 10px;
+        margin-left: 7rem;
+    }
+
+    .hidden-button {
+        background-color: #95bfe800;
+    }
+
+    .container-button {
+        display: none;
+    }
+
+    div.moreInfo {
+        display: flex;
+        width: 45%;
+        right: 0;
+        top: 0;
+        height: 70%;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        margin-top: 9rem;
+        margin-right: 5rem;
+        border-radius: 10px;
+    }
 }
