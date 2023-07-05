@@ -13,4 +13,12 @@ La previsión se muestra con iconos sencillos de forma interactiva según la loc
 
 ## Acceso 
 ---
-Para acceder a la aplicación es necesaria su descarga, ya que la API de la cual obtiene los datos de HTTP en lugar de HTTPS.
+Para acceder a la aplicación es necesaria su descarga, ya que la API obtiene los datos de HTTP en lugar de HTTPS.
+
+📁 [Descarga](https://github.com/Nannitta/WeatherAPP.git)
+
+## Tecnologías utilizadas
+---
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) &nbsp;&nbsp;&nbsp;
+![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) &nbsp;&nbsp;&nbsp;
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
