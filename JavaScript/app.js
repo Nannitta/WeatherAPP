@@ -32,7 +32,7 @@ const geolocButtons = document.querySelector('.geolocButtons');
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const urlApi = 'http://api.weatherapi.com/v1/forecast.json?key=';
+const urlApi = 'https://api.weatherapi.com/v1/forecast.json?key=';
 const apiKey = '4f63ec3fbf1241a4a72160405231806';
 const params = '&days=3&aqi=no&alerts=no&lang=es';
 let locationUser = '';
